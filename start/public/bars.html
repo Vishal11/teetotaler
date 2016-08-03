@@ -1,0 +1,61 @@
+<div class="clearfix">
+
+Select State:<select class="selectpicker" ng-model="selectedStateId" ng-change="GetStateBars()">
+  <option ng-repeat="state in states" value="{{state[0]}}">{{state[1]}}</option>  
+</select>
+
+Select Bar:<select class="selectpicker" ng-model="selectedBarId" ng-change="GetSelectedBarData()">
+  <option ng-repeat="bar in bars" value="{{bar.id}}">{{bar.name}}</option>
+</select>
+
+<div>Name:{{barData[0].name}}<br/>
+Address: {{barData[0].address}}<br/>
+Contact: {{barData[0].contactNumber}}
+</div>
+
+<form ng-Submit="addUpdateReview()" ng-show="authenticated">
+  <h4>{{current_user}} says</h4>
+  <!-- <div class="divClass" data-webRating="2.5" data-webRatingN="5" data-webRatingArg='{"type":"book","uid":12}'>aa</div> -->
+  	Rating:<select ng-model="review.rating">
+  		<option value="5">5</option>
+  		<option value="4">4</option>
+  		<option value="3">3</option>
+  		<option value="2">2</option>
+  		<option value="1">1</option>
+  	</select>
+    <!-- <input required type="text" class="form-control" placeholder="Your name" ng-model="newPost.created_by"/>  -->
+    <textarea required class="form-control" maxlength="200" rows="3" placeholder="Say something" ng-model="review.text"></textarea>
+    <input class="btn submit-btn pull-right" type="submit" value="Boom!" />
+</form>
+ <div id="post-stream" ng-show="selectedBarId">
+    <h4>{{barData[0].name}} reviews:</h4>
+        <!-- <div class="post" ng-repeat="review in reviews | orderBy:'created_at':true" ng-class-odd="'odd'" ng-class-even="'even'">  -->
+        <div class="post" ng-repeat="review in reviews | filter:{barId:selectedBarId}:true | orderBy:created_at:true" ng-class-odd="'odd'" ng-class-even="'even'">
+        <div ng-hide="editable"> 
+           Rating: {{review.rating}}
+          <p>{{review.review}}</p>
+          <input type="button" value="Edit" ng-click="editReview(review)" ng-show="{{review.userId==current_userId}}"/>
+          <input type="button" value="Delete" ng-click="deleteReview(review)" ng-show="{{review.userId==current_userId}}"/>
+        <!-- <small>Posted by @{{current_user}}</small> -->
+        <small class="pull-right">{{review.created_at | date:"h:mma 'on' MMM d, y"}}</small>
+        </div>
+       <div ng-show="editable">
+       <form ng-Submit="updateReview(review)">
+         Rating:<select ng-model="review.rating">
+  		<option value="5">5</option>
+  		<option value="4">4</option>
+  		<option value="3">3</option>
+  		<option value="2">2</option>
+  		<option value="1">1</option>
+  		</select>      
+  		<textarea required class="form-control" maxlength="200" rows="3"  ng-model="review.review"></textarea>   
+  		<small class="pull-right" ng-hide="true" ng-model=review.created_at></small>
+          <input type="submit" value="Save"/>
+          <input type="button" value="Cancel" ng-click="cancelUpdateReview()"/>
+        </form>
+        </div>
+        <div ng-class-odd="'odd'" ng-class-even="'even'" class="post">
+        
+        </div>
+  </div>
+</div>

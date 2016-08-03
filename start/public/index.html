@@ -1,0 +1,32 @@
+
+<html>
+  <head>
+    <title>!teeTotaler</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-route.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-resource.js"></script>
+    <script src="javascripts/chirpApp.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="javascripts/jquery.webRating.js"></script>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="shortcut icon" href="">
+  </head>
+  <body ng-app="chirpApp">
+  <div id='main' class="container">
+  <nav class="navbar-fluid navbar-default navbar-fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="#"> !teeTotaler </a>
+          <p class="navbar-text"> Review and Comment..</p>
+          <p class="navbar-right navbar-text"><a href="#/bars" ng-show="authenticated">Bars</a><a href="#/adminBar" ng-show="authenticated">Create Bars</a><a href="#/login" ng-hide="authenticated">Login</a>  <a href="#/register" ng-hide="authenticated">Register</a></p>
+          <p class="navbar-right navbar-text" ng-show="authenticated"><a href="#" ng-click="signout()">Logout</a></p>
+    	  <p class="navbar-right navbar-text" ng-show="authenticated">Signed in as {{current_user}}</p>
+        </div>
+      </nav>
+  <div class="col-md-offset-2 col-md-8">
+  <div ng-view></div>
+  </div>
+  </div>
+  </body>
+</html>

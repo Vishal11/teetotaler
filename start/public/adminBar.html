@@ -1,0 +1,22 @@
+<div class="clearfix">
+  <form ng-Submit="createUpdateBar(bar)" ng-show="authenticated" enctype="multipart/form-data">
+  <h4>{{current_user}} says</h4>
+    <!-- <input required type="text" class="form-control" placeholder="Your name" ng-model="newPost.created_by"/>  -->
+    <div>Name: <input type="text" name="BarName" required class="form-control" placeholder="Name" ng-model="bar.name"/></div>
+    <div>Address: <input type="text" name="Address" required class="form-control" placeholder="Address" ng-model="bar.address"/></div>
+    <div>State: <select class="selectpicker" ng-model="bar.stateId">
+    <option ng-repeat="state in states" value="{{state[0]}}">{{state[1]}}</option>  
+	</select>
+	</div>
+
+    <div>Contact: <input type="text" name="Contact" required class="form-control" placeholder="Contact" ng-model="bar.contactNumber"/></div>
+    <div>Cuisines: <input type="text" name="Cuisines" required class="form-control" placeholder="Cusines" ng-model="bar.cuisines"/></div>
+    <div>Type Of Cafe: <input type="text" name="Type" required class="form-control" placeholder="Type" ng-model="bar.type"/></div>
+    <div>Description 1: <input type="text" name="Description 1"  class="form-control" placeholder="Description 1" ng-model="bar.description1"/></div>
+    <div>Description 2: <input type="text" name="Description 2"  class="form-control" placeholder="Description 2" ng-model="bar.description2"/></div>
+    <div>Description 3: <input type="text" name="Description 3"  class="form-control" placeholder="Description 3" ng-model="bar.description3"/></div>
+    <input type="file" name="file" ng-bind="imagePath">
+    <input class="btn submit-btn pull-right" type="submit" value="Save !" />
+  </form>
+</div>
+
